@@ -1,0 +1,447 @@
+[
+  {
+    "id": "sg-01",
+    "text": "Can help check ah? Customer Mei Lin says parcel go to Blk 123 Ang Mo Kio Ave 3, #12-34 Singapore 560123.",
+    "spans": [
+      {
+        "start": 28,
+        "end": 35,
+        "label": "PERSON"
+      },
+      {
+        "start": 54,
+        "end": 103,
+        "label": "ADDRESS"
+      }
+    ]
+  },
+  {
+    "id": "sg-02",
+    "text": "Please call Mr Tan at +65 9123 4567, he waiting since morning leh.",
+    "spans": [
+      {
+        "start": 12,
+        "end": 18,
+        "label": "PERSON"
+      },
+      {
+        "start": 22,
+        "end": 35,
+        "label": "PHONE"
+      }
+    ]
+  },
+  {
+    "id": "sg-03",
+    "text": "Order owner is Aisha Rahman, email aisha.rahman@example.com can?",
+    "spans": [
+      {
+        "start": 15,
+        "end": 27,
+        "label": "PERSON"
+      },
+      {
+        "start": 35,
+        "end": 59,
+        "label": "EMAIL"
+      }
+    ]
+  },
+  {
+    "id": "sg-04",
+    "text": "Customer gave NRIC S1234567D for verification, please don't paste outside.",
+    "spans": [
+      {
+        "start": 19,
+        "end": 28,
+        "label": "SG_NRIC"
+      }
+    ]
+  },
+  {
+    "id": "sg-05",
+    "text": "Deliver to 8 Shenton Way, #25-01 Singapore 068811, attention Daniel Goh.",
+    "spans": [
+      {
+        "start": 11,
+        "end": 49,
+        "label": "ADDRESS"
+      },
+      {
+        "start": 61,
+        "end": 71,
+        "label": "PERSON"
+      }
+    ]
+  },
+  {
+    "id": "sg-06",
+    "text": "Her mobile 81234567 and backup 6123-4567 both can contact.",
+    "spans": [
+      {
+        "start": 11,
+        "end": 19,
+        "label": "PHONE"
+      },
+      {
+        "start": 31,
+        "end": 40,
+        "label": "PHONE"
+      }
+    ]
+  },
+  {
+    "id": "sg-07",
+    "text": "Eh the buyer Chloe Ng changed email to chloe.ng+shop@mail.example.sg.",
+    "spans": [
+      {
+        "start": 13,
+        "end": 21,
+        "label": "PERSON"
+      },
+      {
+        "start": 39,
+        "end": 68,
+        "label": "EMAIL"
+      }
+    ]
+  },
+  {
+    "id": "sg-08",
+    "text": "Send replacement to Blk 45 Tampines St 42 #03-118, Singapore 529001.",
+    "spans": [
+      {
+        "start": 20,
+        "end": 67,
+        "label": "ADDRESS"
+      }
+    ]
+  },
+  {
+    "id": "sg-09",
+    "text": "Account holder: Ravi Kumar; contact: 9876 5432; pls expedite.",
+    "spans": [
+      {
+        "start": 16,
+        "end": 26,
+        "label": "PERSON"
+      },
+      {
+        "start": 37,
+        "end": 46,
+        "label": "PHONE"
+      }
+    ]
+  },
+  {
+    "id": "sg-10",
+    "text": "Ticket says F7654321N but customer name omitted.",
+    "spans": [
+      {
+        "start": 12,
+        "end": 21,
+        "label": "SG_NRIC"
+      }
+    ]
+  },
+  {
+    "id": "sg-11",
+    "text": "Can email invoice to finance.user@sample.co, thanks ah.",
+    "spans": [
+      {
+        "start": 21,
+        "end": 43,
+        "label": "EMAIL"
+      }
+    ]
+  },
+  {
+    "id": "sg-12",
+    "text": "Pickup from 1 Jurong West Central 2, #B1-07 Singapore 648886 for Nur Izzati.",
+    "spans": [
+      {
+        "start": 12,
+        "end": 60,
+        "label": "ADDRESS"
+      },
+      {
+        "start": 65,
+        "end": 75,
+        "label": "PERSON"
+      }
+    ]
+  },
+  {
+    "id": "sg-13",
+    "text": "Customer Lim Wei Jie called from +65-8765-4321 about late delivery.",
+    "spans": [
+      {
+        "start": 9,
+        "end": 20,
+        "label": "PERSON"
+      },
+      {
+        "start": 33,
+        "end": 46,
+        "label": "PHONE"
+      }
+    ]
+  },
+  {
+    "id": "sg-14",
+    "text": "Use this temporary contact 92345678, recipient is Priya Nair.",
+    "spans": [
+      {
+        "start": 27,
+        "end": 35,
+        "label": "PHONE"
+      },
+      {
+        "start": 50,
+        "end": 60,
+        "label": "PERSON"
+      }
+    ]
+  },
+  {
+    "id": "sg-15",
+    "text": "Address typo maybe: Blk 701 Bedok Reservoir Rd #10-220 Singapore 470701.",
+    "spans": [
+      {
+        "start": 20,
+        "end": 71,
+        "label": "ADDRESS"
+      }
+    ]
+  },
+  {
+    "id": "sg-16",
+    "text": "G1234567X belongs to the requester, do not include in reply.",
+    "spans": [
+      {
+        "start": 0,
+        "end": 9,
+        "label": "SG_NRIC"
+      }
+    ]
+  },
+  {
+    "id": "sg-17",
+    "text": "Pls update Jia Hui at jiahui_test@example.org once refund done.",
+    "spans": [
+      {
+        "start": 11,
+        "end": 18,
+        "label": "PERSON"
+      },
+      {
+        "start": 22,
+        "end": 45,
+        "label": "EMAIL"
+      }
+    ]
+  },
+  {
+    "id": "sg-18",
+    "text": "The unit is #118-7, customer wrote it like that; phone 9000 1111.",
+    "spans": [
+      {
+        "start": 12,
+        "end": 18,
+        "label": "UNIT_NUMBER"
+      },
+      {
+        "start": 55,
+        "end": 64,
+        "label": "PHONE"
+      }
+    ]
+  },
+  {
+    "id": "sg-19",
+    "text": "Mail to 10 Anson Road #17-05 International Plaza Singapore 079903.",
+    "spans": [
+      {
+        "start": 8,
+        "end": 65,
+        "label": "ADDRESS"
+      }
+    ]
+  },
+  {
+    "id": "sg-20",
+    "text": "Name maybe misspelled as Muhd Faizal, number +6591112222.",
+    "spans": [
+      {
+        "start": 25,
+        "end": 36,
+        "label": "PERSON"
+      },
+      {
+        "start": 45,
+        "end": 56,
+        "label": "PHONE"
+      }
+    ]
+  },
+  {
+    "id": "sg-21",
+    "text": "Customer typed s2345678e in lowercase, please mask it also.",
+    "spans": [
+      {
+        "start": 15,
+        "end": 24,
+        "label": "SG_NRIC"
+      }
+    ]
+  },
+  {
+    "id": "sg-22",
+    "text": "Contact Li Xiu Ying via li.xy@demo.net; she prefers email.",
+    "spans": [
+      {
+        "start": 8,
+        "end": 19,
+        "label": "PERSON"
+      },
+      {
+        "start": 24,
+        "end": 38,
+        "label": "EMAIL"
+      }
+    ]
+  },
+  {
+    "id": "sg-23",
+    "text": "Drop at Blk 9 Hougang Ave 3 #01-55 Singapore 530009, can lah.",
+    "spans": [
+      {
+        "start": 8,
+        "end": 51,
+        "label": "ADDRESS"
+      }
+    ]
+  },
+  {
+    "id": "sg-24",
+    "text": "Callback requested by Ahmad Bin Salleh at 8899-0011.",
+    "spans": [
+      {
+        "start": 22,
+        "end": 38,
+        "label": "PERSON"
+      },
+      {
+        "start": 42,
+        "end": 51,
+        "label": "PHONE"
+      }
+    ]
+  },
+  {
+    "id": "sg-25",
+    "text": "Two contacts: Eunice Koh 83334444 and Marcus Lee 96667777.",
+    "spans": [
+      {
+        "start": 14,
+        "end": 24,
+        "label": "PERSON"
+      },
+      {
+        "start": 25,
+        "end": 33,
+        "label": "PHONE"
+      },
+      {
+        "start": 38,
+        "end": 48,
+        "label": "PERSON"
+      },
+      {
+        "start": 49,
+        "end": 57,
+        "label": "PHONE"
+      }
+    ]
+  },
+  {
+    "id": "sg-26",
+    "text": "Ship to 77 Robinson Rd, Singapore 068896 for Sean Ong.",
+    "spans": [
+      {
+        "start": 8,
+        "end": 40,
+        "label": "ADDRESS"
+      },
+      {
+        "start": 45,
+        "end": 53,
+        "label": "PERSON"
+      }
+    ]
+  },
+  {
+    "id": "sg-27",
+    "text": "M7654321K and test.person@company.example appeared in the chat.",
+    "spans": [
+      {
+        "start": 0,
+        "end": 9,
+        "label": "SG_NRIC"
+      },
+      {
+        "start": 14,
+        "end": 41,
+        "label": "EMAIL"
+      }
+    ]
+  },
+  {
+    "id": "sg-28",
+    "text": "Wah customer Siti Aminah stays at Blk 321 Clementi Ave 5 #04-88.",
+    "spans": [
+      {
+        "start": 13,
+        "end": 24,
+        "label": "PERSON"
+      },
+      {
+        "start": 34,
+        "end": 63,
+        "label": "ADDRESS"
+      }
+    ]
+  },
+  {
+    "id": "sg-29",
+    "text": "Please ring 67778888. Do not mask order number 20240929 as phone.",
+    "spans": [
+      {
+        "start": 12,
+        "end": 20,
+        "label": "PHONE"
+      }
+    ]
+  },
+  {
+    "id": "sg-30",
+    "text": "Jenny Teo <jenny.teo@example.com> asked delivery to #06-09.",
+    "spans": [
+      {
+        "start": 0,
+        "end": 9,
+        "label": "PERSON"
+      },
+      {
+        "start": 11,
+        "end": 32,
+        "label": "EMAIL"
+      },
+      {
+        "start": 52,
+        "end": 58,
+        "label": "UNIT_NUMBER"
+      }
+    ]
+  }
+]

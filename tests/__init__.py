@@ -1,0 +1,1 @@
+"""SafePaste test package."""

@@ -1,0 +1,62 @@
+{
+  "status": "frozen_for_evaluation",
+  "created_date": "2026-09-30",
+  "frozen_evaluation_used_for_tuning": false,
+  "development_sweep": {
+    "dataset": "data/ai4privacy_split/development_2000.json",
+    "output_dir": "artifacts/threshold_tuning",
+    "records": 2000
+  },
+  "systems": {
+    "presidio": {
+      "mode": "presidio",
+      "description": "Presidio-only structured PII baseline"
+    },
+    "gliner": {
+      "mode": "gliner",
+      "description": "GLiNER-only contextual PII detector"
+    },
+    "hybrid": {
+      "mode": "hybrid",
+      "description": "Presidio plus GLiNER with shared overlap resolution"
+    }
+  },
+  "label_mapping": {
+    "path": "configs/label_mapping.json",
+    "version": "safepaste-label-mapping-v1",
+    "target_labels": [
+      "ADDRESS",
+      "EMAIL",
+      "FINANCIAL",
+      "GOVERNMENT_ID",
+      "IP_ADDRESS",
+      "PERSON",
+      "PHONE"
+    ]
+  },
+  "presidio": {
+    "source": "presidio",
+    "nlp_engine": "NoOpNlpEngine",
+    "custom_recognizers": [
+      "SafePasteSingaporeNricRecognizer",
+      "SafePasteSingaporePhoneRecognizer",
+      "SafePasteSingaporeUnitRecognizer",
+      "SafePasteSingaporePostalCodeRecognizer"
+    ]
+  },
+  "gliner": {
+    "model_repo": "urchade/gliner_multi_pii-v1",
+    "model_path_env": "SAFEPASTE_GLINER_MODEL",
+    "local_files_only": true,
+    "typed_threshold": 0.55,
+    "abstain_threshold": 0.40,
+    "selection_rationale": "Selected from development sweep to retain PERSON/ADDRESS typed recall while controlling over-redaction and abstention."
+  },
+  "evaluation": {
+    "boundary_metrics": ["exact", "overlap"],
+    "prediction_types": ["typed", "protective"],
+    "typed_metrics_require_label_match": true,
+    "protective_metrics_include_abstained": true,
+    "matching": "one_to_one"
+  }
+}

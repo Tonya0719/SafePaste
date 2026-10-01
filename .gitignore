@@ -1,0 +1,46 @@
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Python caches and build outputs
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDE and OS metadata
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local model downloads
+models/*
+!models/README.md
+
+# Downloaded/generated datasets
+data/ai4privacy_split/*.json
+data/ai4privacy_split/*.jsonl
+
+# Large/generated experiment internals
+results/runs/
+artifacts/threshold_tuning/raw_gliner_predictions.jsonl
+artifacts/threshold_tuning_smoke*/
+
+# Logs and accidental command-output files
+*.log
+4.25.0

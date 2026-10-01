@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SafePaste</title>
+  <style>
+    :root{font-family:Inter,Segoe UI,sans-serif;color:#172033;background:#f5f7fb}*{box-sizing:border-box}body{margin:0}.wrap{max-width:1050px;margin:48px auto;padding:0 24px}header{display:flex;justify-content:space-between;align-items:end;margin-bottom:24px}h1{font-size:36px;margin:0}header p{margin:6px 0 0;color:#5a6579}.local{color:#17603a;font-weight:700}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.card{background:white;border:1px solid #dce1ea;border-radius:14px;padding:20px;box-shadow:0 8px 28px #1720330d}label{display:block;font-weight:700;margin-bottom:10px}textarea{width:100%;min-height:260px;border:1px solid #bfc7d5;border-radius:9px;padding:14px;font:15px/1.55 ui-monospace,Consolas,monospace;resize:vertical}button{border:0;border-radius:9px;padding:11px 16px;background:#224d8f;color:white;font-weight:700;cursor:pointer;margin:12px 8px 0 0}.secondary{background:#e9eef7;color:#22406b}.warning{color:#8a4b08;background:#fff5df;padding:10px;border-radius:8px;margin-top:12px}.spans{margin-top:18px}.span{display:grid;grid-template-columns:1fr auto auto;gap:10px;padding:9px 0;border-bottom:1px solid #edf0f5;font-size:14px}.muted{color:#6b7485}footer{margin-top:18px;color:#667085;font-size:13px}@media(max-width:760px){.grid{grid-template-columns:1fr}header{display:block}}
+  </style>
+</head>
+<body><main class="wrap">
+  <header><div><h1>SafePaste</h1><p>Review PII before pasting text into a public AI assistant.</p></div><div class="local">● Local processing</div></header>
+  <section class="grid">
+    <div class="card"><label for="source">Original text</label><textarea id="source" placeholder="Paste an English workplace message here…">Hi, I am Mei Tan. Please send the parcel to Blk 123 Ang Mo Kio Ave 3, #12-34 Singapore 560123. Call me at +65 9123 4567 or email mei.tan@example.com.</textarea><button id="check">Check and mask</button></div>
+    <div class="card"><label for="result">Sanitised text</label><textarea id="result" readonly></textarea><button id="copy">Copy sanitised text</button><button id="restore" class="secondary">Restore all</button><div id="warning"></div></div>
+  </section>
+  <section class="card spans"><label>Detected spans</label><div id="spans" class="muted">Run a check to see detections.</div></section>
+  <footer>No text is sent to a cloud service. The restore map remains in this browser tab and server response; do not log or persist it.</footer>
+</main><script>
+let last=null;
+const $=id=>document.getElementById(id);
+$('check').onclick=async()=>{const response=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:$('source').value})});last=await response.json();if(last.error){$('warning').textContent=last.error;return}$('result').value=last.redacted;$('warning').innerHTML=last.warnings.map(x=>`<div class="warning">${escapeHtml(x)}</div>`).join('');$('spans').innerHTML=last.spans.length?last.spans.map(s=>`<div class="span"><span>${escapeHtml(s.text)}</span><b>${s.abstained?'POSSIBLE_PII':escapeHtml(s.label)}</b><span>${Math.round(s.score*100)}% · ${escapeHtml(s.source)}</span></div>`).join(''):'No PII detected.'};
+$('restore').onclick=()=>{if(last)$('result').value=Object.entries(last.restore_map).reduce((t,[k,v])=>t.split(k).join(v),last.redacted)};
+$('copy').onclick=()=>navigator.clipboard.writeText($('result').value);
+function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+</script></body></html>
+

@@ -1,0 +1,26 @@
+{
+  "generated_at": "2026-09-29T15:47:57.129103+00:00",
+  "files": {
+    "development": {
+      "path": "data\\ai4privacy_split\\development_2000.json",
+      "bytes": 2286863,
+      "sha256": "164cb9cc78edc45994a3b50ce6b95c1e8cd9db071290cd2a2c6a49c1e58edb81",
+      "records": 2000,
+      "spans": 14336
+    },
+    "frozen_evaluation": {
+      "path": "data\\ai4privacy_split\\frozen_evaluation_3000.json",
+      "bytes": 3447005,
+      "sha256": "05917b6e4f68edc7cd10f1808c1982f0550cfc63fbd0ed8c5ebcdc493a854ef1",
+      "records": 3000,
+      "spans": 21698
+    },
+    "singapore_stress": {
+      "path": "data\\singapore_stress.json",
+      "bytes": 8681,
+      "sha256": "88e08f7ff492333ec19f3360a326461b31c8c83b6a88ad047c06b12fd97a5ace",
+      "records": 30,
+      "spans": 53
+    }
+  }
+}

@@ -1,0 +1,4 @@
+dataset,path,records,expected_records,record_count_ok,spans,span_issues,overlap_relations
+development,data\ai4privacy_split\development_2000.json,2000,2000,True,14336,1,44
+frozen_evaluation,data\ai4privacy_split\frozen_evaluation_3000.json,3000,3000,True,21698,0,82
+singapore_stress,data\singapore_stress.json,30,30,True,53,0,0

@@ -1,0 +1,165 @@
+{
+  "version": "safepaste-label-mapping-v1",
+  "generated_date": "2026-09-29",
+  "source_dataset": "development_2000.json",
+  "policy": {
+    "frozen_evaluation_used": false,
+    "invalid_spans": "Exclude invalid gold spans during normalized evaluation and report their counts.",
+    "overlapping_gold_spans": "Preserve spans during audit; normalized evaluation must use one-to-one matching."
+  },
+  "target_labels": [
+    "ADDRESS",
+    "EMAIL",
+    "FINANCIAL",
+    "GOVERNMENT_ID",
+    "IP_ADDRESS",
+    "PERSON",
+    "PHONE"
+  ],
+  "entries": {
+    "BOD": {
+      "target": "EXCLUDED",
+      "count": 602,
+      "reason": "Temporal attribute outside the current SafePaste detector scope."
+    },
+    "BUILDING": {
+      "target": "ADDRESS",
+      "count": 546,
+      "reason": "Building numbers are address components."
+    },
+    "CITY": {
+      "target": "ADDRESS",
+      "count": 578,
+      "reason": "Cities are retained as address/location components for this experiment."
+    },
+    "COUNTRY": {
+      "target": "ADDRESS",
+      "count": 438,
+      "reason": "Countries are retained as address/location components for consistent address evaluation."
+    },
+    "DATE": {
+      "target": "EXCLUDED",
+      "count": 502,
+      "reason": "General dates are outside the current SafePaste PII scope."
+    },
+    "DRIVERLICENSE": {
+      "target": "GOVERNMENT_ID",
+      "count": 663,
+      "reason": "Driver license values are government-issued identifiers."
+    },
+    "EMAIL": {
+      "target": "EMAIL",
+      "count": 691,
+      "reason": "Direct email address PII."
+    },
+    "GEOCOORD": {
+      "target": "ADDRESS",
+      "count": 50,
+      "reason": "Geographic coordinates can reveal precise location."
+    },
+    "GIVENNAME1": {
+      "target": "PERSON",
+      "count": 586,
+      "reason": "Given names are person-name components."
+    },
+    "GIVENNAME2": {
+      "target": "PERSON",
+      "count": 136,
+      "reason": "Given names are person-name components."
+    },
+    "IDCARD": {
+      "target": "GOVERNMENT_ID",
+      "count": 774,
+      "reason": "ID card values are government-issued identifiers."
+    },
+    "IP": {
+      "target": "IP_ADDRESS",
+      "count": 572,
+      "reason": "IP addresses are structured network identifiers."
+    },
+    "LASTNAME1": {
+      "target": "PERSON",
+      "count": 668,
+      "reason": "Last names are person-name components."
+    },
+    "LASTNAME2": {
+      "target": "PERSON",
+      "count": 172,
+      "reason": "Last names are person-name components."
+    },
+    "LASTNAME3": {
+      "target": "PERSON",
+      "count": 61,
+      "reason": "Last names are person-name components."
+    },
+    "PASS": {
+      "target": "EXCLUDED",
+      "count": 440,
+      "reason": "Passwords are credentials; this project reports that credentials are outside the PII detector scope."
+    },
+    "PASSPORT": {
+      "target": "GOVERNMENT_ID",
+      "count": 680,
+      "reason": "Passport values are government-issued identifiers."
+    },
+    "POSTCODE": {
+      "target": "ADDRESS",
+      "count": 525,
+      "reason": "Postal codes are address components."
+    },
+    "SECADDRESS": {
+      "target": "ADDRESS",
+      "count": 235,
+      "reason": "Secondary address fields are address components."
+    },
+    "SEX": {
+      "target": "EXCLUDED",
+      "count": 566,
+      "reason": "Demographic attributes are outside the current direct-PII detector scope."
+    },
+    "SOCIALNUMBER": {
+      "target": "GOVERNMENT_ID",
+      "count": 747,
+      "reason": "Social number values are government-issued identifiers."
+    },
+    "STATE": {
+      "target": "ADDRESS",
+      "count": 559,
+      "reason": "States are retained as address/location components for this experiment."
+    },
+    "STREET": {
+      "target": "ADDRESS",
+      "count": 540,
+      "reason": "Street names are address components."
+    },
+    "TEL": {
+      "target": "PHONE",
+      "count": 488,
+      "reason": "Direct telephone number PII."
+    },
+    "TIME": {
+      "target": "EXCLUDED",
+      "count": 1124,
+      "reason": "Standalone times are outside the current SafePaste PII scope."
+    },
+    "TITLE": {
+      "target": "EXCLUDED",
+      "count": 568,
+      "reason": "Honorifics or job titles alone are not treated as PII in this scope."
+    },
+    "USERNAME": {
+      "target": "EXCLUDED",
+      "count": 825,
+      "reason": "Account usernames are outside the current detector scope and are reported as a limitation."
+    }
+  },
+  "excluded_labels": [
+    "BOD",
+    "DATE",
+    "PASS",
+    "SEX",
+    "TIME",
+    "TITLE",
+    "USERNAME"
+  ]
+}
