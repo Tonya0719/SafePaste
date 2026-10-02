@@ -48,3 +48,6 @@ temp/
 # Logs and accidental command-output files
 *.log
 4.25.0
+
+docs/video_demo_script.md
+docs\final_analysis.md
