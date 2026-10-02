@@ -1,0 +1,6 @@
+{
+  "dataset": "ai4privacy/pii-masking-300k",
+  "seed": 6201,
+  "development": 2000,
+  "frozen_evaluation": 3000
+}

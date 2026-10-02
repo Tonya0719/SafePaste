@@ -1,3 +1,10 @@
+"""Local GLiNER adapter for contextual PII detection.
+
+Inputs are English text strings and a configured local model directory. Outputs
+are SafePaste `Span` objects for contextual labels such as PERSON and ADDRESS.
+The adapter uses `local_files_only` and marks low-confidence spans as abstained
+instead of silently treating them as typed detections.
+"""
 from __future__ import annotations
 
 import os
@@ -15,6 +22,8 @@ LABEL_MAP = {
 
 
 class GLiNERDetector:
+    """Lazy-loading wrapper around a local GLiNER model."""
+
     name = "gliner"
 
     def __init__(
@@ -46,6 +55,8 @@ class GLiNERDetector:
         return self._model
 
     def detect(self, text: str) -> list[Span]:
+        """Predict contextual spans and apply typed/abstention thresholds."""
+
         model = self._load()
         raw = model.predict_entities(text, list(LABEL_MAP), threshold=self.abstain_threshold)
         spans = []

@@ -1,3 +1,9 @@
+"""Legacy regular-expression detector kept for debugging comparisons.
+
+Formal experiments use Presidio as the structured baseline. This module remains
+available through `regex-legacy` for simple local checks and historical tests,
+but it is not part of the final three-system evaluation.
+"""
 from __future__ import annotations
 
 import re
@@ -25,6 +31,8 @@ RULES = (
 
 
 class RegexDetector:
+    """Apply simple local regular-expression rules and return SafePaste spans."""
+
     name = "regex"
 
     def detect(self, text: str) -> list[Span]:

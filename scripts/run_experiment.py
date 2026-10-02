@@ -54,6 +54,8 @@ def run_experiment(
     limit: int | None = None,
     progress_every: int = 100,
 ) -> dict:
+    """Run one configured system on one dataset and persist standard artifacts."""
+
     config = load_json(config_path)
     label_mapping = load_json(Path(config["label_mapping"]["path"]))
     records = load_json(dataset_path)
@@ -142,6 +144,8 @@ def run_experiment(
 
 
 def runtime_summary(values: list[float]) -> dict:
+    """Summarize per-record runtimes captured during a batch run."""
+
     if not values:
         return {"mean_ms": 0.0, "p95_ms": 0.0, "total_ms": 0.0}
     ordered = sorted(values)

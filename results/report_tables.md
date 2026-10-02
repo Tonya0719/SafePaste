@@ -18,14 +18,14 @@
 
 ## Runtime Summary
 
-| Dataset | System | Records | Mean ms | P95 ms | Errors |
-| --- | --- | ---: | ---: | ---: | ---: |
-| AI4Privacy frozen | Presidio-only | 3000 | 5.58 | 5.13 | 0 |
-| AI4Privacy frozen | GLiNER-only | 3000 | 218.45 | 281.29 | 0 |
-| AI4Privacy frozen | Hybrid | 3000 | 215.74 | 276.40 | 0 |
-| Singapore stress | Presidio-only | 30 | 277.40 | 22.62 | 0 |
-| Singapore stress | GLiNER-only | 30 | 773.61 | 180.42 | 0 |
-| Singapore stress | Hybrid | 30 | 774.19 | 191.50 | 0 |
+| Dataset | System | Records | Total ms | First record ms | Warm records | Warm mean ms | Warm P95 ms | Errors |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| AI4Privacy frozen | Presidio-only | 3000 | 16733.19 | 10480.54 | 2999 | 2.08 | 5.12 | 0 |
+| AI4Privacy frozen | GLiNER-only | 3000 | 655357.87 | 12181.39 | 2999 | 214.46 | 281.15 | 0 |
+| AI4Privacy frozen | Hybrid | 3000 | 647223.65 | 14212.15 | 2999 | 211.07 | 276.36 | 0 |
+| Singapore stress | Presidio-only | 30 | 8322.13 | 8277.38 | 29 | 1.54 | 2.28 | 0 |
+| Singapore stress | GLiNER-only | 30 | 23208.15 | 18948.78 | 29 | 146.87 | 173.73 | 0 |
+| Singapore stress | Hybrid | 30 | 23225.56 | 18937.80 | 29 | 147.85 | 178.77 | 0 |
 
 ## Hybrid Per-Label Results: AI4Privacy Frozen
 

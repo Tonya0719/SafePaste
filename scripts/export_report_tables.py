@@ -39,8 +39,11 @@ RUNTIME_COLUMNS = [
     ("dataset", "Dataset"),
     ("system", "System"),
     ("records", "Records"),
-    ("mean_ms", "Mean ms"),
-    ("p95_ms", "P95 ms"),
+    ("total_ms", "Total ms"),
+    ("first_record_ms", "First record ms"),
+    ("warm_records", "Warm records"),
+    ("warm_mean_ms", "Warm mean ms"),
+    ("warm_p95_ms", "Warm P95 ms"),
     ("errors", "Errors"),
 ]
 
@@ -151,7 +154,20 @@ def run(results_dir: Path, output: Path) -> None:
         "overlap_typed_precision",
         "abstention_rate",
     }
-    number_keys = {"records", "gold_spans", "predicted_spans", "mean_ms", "p95_ms", "errors", "count"}
+    number_keys = {
+        "records",
+        "gold_spans",
+        "predicted_spans",
+        "mean_ms",
+        "p95_ms",
+        "total_ms",
+        "first_record_ms",
+        "warm_records",
+        "warm_mean_ms",
+        "warm_p95_ms",
+        "errors",
+        "count",
+    }
     runtime_rows = sort_by_dataset_and_system(runtime_rows)
     content = [
         "# SafePaste Report Tables",

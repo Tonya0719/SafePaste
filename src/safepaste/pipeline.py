@@ -1,3 +1,9 @@
+"""Detector orchestration for the SafePaste product path.
+
+The pipeline accepts a single text string, runs the requested detector mode,
+resolves overlapping spans and returns redacted text plus review metadata. It
+connects Presidio, GLiNER, legacy regex detection and reversible redaction.
+"""
 from __future__ import annotations
 
 from .gliner_detector import GLiNERDetector
@@ -8,6 +14,8 @@ from .types import Span
 
 
 class SafePastePipeline:
+    """Run SafePaste detection and redaction for one configured mode."""
+
     def __init__(self, mode: str = "hybrid", gliner: GLiNERDetector | None = None):
         if mode not in {"presidio", "regex", "regex-legacy", "gliner", "hybrid"}:
             raise ValueError("mode must be presidio, regex, regex-legacy, gliner, or hybrid")
@@ -17,6 +25,8 @@ class SafePastePipeline:
         self.gliner = gliner or GLiNERDetector()
 
     def detect(self, text: str) -> tuple[list[Span], list[str]]:
+        """Return resolved spans and non-fatal detector warnings for `text`."""
+
         warnings: list[str] = []
         spans: list[Span] = []
         if self.mode in {"presidio", "regex", "hybrid"}:
@@ -33,6 +43,8 @@ class SafePastePipeline:
         return resolve_overlaps(spans), warnings
 
     def analyze(self, text: str) -> dict:
+        """Return API-ready analysis output, including redacted text and spans."""
+
         spans, warnings = self.detect(text)
         redacted, restore_map = redact(text, spans)
         return {

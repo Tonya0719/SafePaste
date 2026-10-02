@@ -1,0 +1,8 @@
+{
+  "mapping": "configs\\label_mapping_v2_product_scope.json",
+  "mapping_version": "safepaste-label-mapping-v2-product-scope",
+  "official_baseline_replaced": false,
+  "detectors_rerun": false,
+  "main_rows": 6,
+  "per_label_rows": 39
+}

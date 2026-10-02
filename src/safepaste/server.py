@@ -1,3 +1,9 @@
+"""Loopback-only HTTP server for the SafePaste demo UI.
+
+The server exposes local analyze and restore endpoints backed by
+`SafePastePipeline`. It serves the static browser UI, avoids request-body logs
+and refuses non-loopback binding to keep the demo local.
+"""
 from __future__ import annotations
 
 import argparse
@@ -14,6 +20,8 @@ MODES = ["presidio", "regex", "regex-legacy", "gliner", "hybrid"]
 
 
 def make_handler(pipeline: SafePastePipeline):
+    """Create a request handler bound to a configured SafePaste pipeline."""
+
     class Handler(BaseHTTPRequestHandler):
         def _send(self, status: int, body: bytes, content_type: str) -> None:
             self.send_response(status)

@@ -232,6 +232,48 @@ def safe_div(numerator: int, denominator: int) -> float:
     return numerator / denominator if denominator else 0.0
 
 
+def percentile(values: list[float], fraction: float) -> float:
+    """Return the nearest-rank percentile used by the original runtime summary."""
+    if not values:
+        return 0.0
+    ordered = sorted(values)
+    index = min(len(ordered) - 1, int(len(ordered) * fraction))
+    return ordered[index]
+
+
+def latency_summary(values: list[float]) -> dict:
+    """Summarise end-to-end and warm latency values from saved per-record runtimes."""
+    if not values:
+        return {
+            "mean_ms": 0.0,
+            "p95_ms": 0.0,
+            "total_ms": 0.0,
+            "first_record_ms": 0.0,
+            "warm_records": 0,
+            "warm_mean_ms": 0.0,
+            "warm_p95_ms": 0.0,
+            "warm_excludes_first_record": True,
+        }
+    warm = values[1:]
+    return {
+        "mean_ms": safe_div(sum(values), len(values)),
+        "p95_ms": percentile(values, 0.95),
+        "total_ms": sum(values),
+        "first_record_ms": values[0],
+        "warm_records": len(warm),
+        "warm_mean_ms": safe_div(sum(warm), len(warm)),
+        "warm_p95_ms": percentile(warm, 0.95),
+        "warm_excludes_first_record": True,
+    }
+
+
+def runtime_rows(dataset: str, system: str, rows: list[dict], errors: int) -> dict:
+    """Build a report row that separates cold-start and steady-state runtime."""
+    summary = latency_summary([float(row.get("runtime_ms", 0.0)) for row in rows])
+    summary.update({"dataset": dataset, "system": system, "records": len(rows), "errors": errors})
+    return summary
+
+
 def write_csv(path: Path, rows: list[dict]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     if not rows:
@@ -247,6 +289,7 @@ def run(output_dir: Path) -> dict:
     per_label_rows: list[dict] = []
     error_rows: list[dict] = []
     representative: list[dict] = []
+    runtime_summary_rows: list[dict] = []
     for dataset, system, run_dir, dataset_path in RUNS:
         rows = load_jsonl(run_dir / "predictions.jsonl")
         records = load_json(dataset_path)
@@ -255,10 +298,18 @@ def run(output_dir: Path) -> dict:
         counts, examples = classify_errors(dataset, system, rows, records_by_id)
         error_rows.extend(counts)
         representative.extend(examples)
+        errors = load_jsonl(run_dir / "errors.jsonl")
+        runtime_summary_rows.append(runtime_rows(dataset, system, rows, len(errors)))
     write_csv(output_dir / "per_label_results.csv", per_label_rows)
     write_csv(output_dir / "error_categories.csv", error_rows)
     (output_dir / "representative_errors.json").write_text(json.dumps(representative, ensure_ascii=False, indent=2), encoding="utf-8")
-    return {"per_label_rows": len(per_label_rows), "error_rows": len(error_rows), "representative_errors": len(representative)}
+    (output_dir / "runtime_summary.json").write_text(json.dumps(runtime_summary_rows, ensure_ascii=False, indent=2), encoding="utf-8")
+    return {
+        "per_label_rows": len(per_label_rows),
+        "error_rows": len(error_rows),
+        "representative_errors": len(representative),
+        "runtime_rows": len(runtime_summary_rows),
+    }
 
 
 def main() -> None:

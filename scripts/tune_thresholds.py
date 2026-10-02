@@ -43,6 +43,8 @@ def cache_gliner_predictions(records: list[dict], abstain_floor: float, model_pa
 
 
 def predictions_for_thresholds(cached: list[list[dict]], typed_threshold: float, abstain_threshold: float) -> list[list[Span]]:
+    """Convert cached raw GLiNER outputs into spans for one threshold pair."""
+
     predictions: list[list[Span]] = []
     for record_spans in cached:
         spans = [
@@ -78,6 +80,8 @@ def per_label_overlap_typed_recall(records: list[dict], predictions: list[list[S
 
 
 def run_sweep(records: list[dict], cached: list[list[dict]], label_mapping: dict, typed_thresholds: list[float], abstain_thresholds: list[float]) -> list[dict]:
+    """Evaluate cached development predictions across typed/abstention thresholds."""
+
     rows: list[dict] = []
     for typed_threshold in typed_thresholds:
         for abstain_threshold in abstain_thresholds:
@@ -126,6 +130,8 @@ def write_prediction_cache(path: Path, records: list[dict], cached: list[list[di
 
 
 def runtime_summary(runtime_ms: list[float]) -> dict:
+    """Summarize raw model prediction time during development threshold caching."""
+
     if not runtime_ms:
         return {"records": 0, "mean_ms": 0, "p95_ms": 0}
     sorted_values = sorted(runtime_ms)

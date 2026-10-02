@@ -1,3 +1,9 @@
+"""Command-line interface for local SafePaste analysis and quick evaluation.
+
+The CLI accepts either a text string for one-off analysis or a JSON dataset for
+evaluation. It is a thin wrapper around `SafePastePipeline` and the evaluator,
+intended for reproducible local commands rather than a hosted service.
+"""
 from __future__ import annotations
 
 import argparse

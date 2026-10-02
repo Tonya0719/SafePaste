@@ -1,3 +1,9 @@
+"""Shared span data structures for detection and evaluation.
+
+Inputs are character offsets and SafePaste labels produced by detectors or loaded
+from gold data. Outputs are immutable span objects used by redaction, overlap
+resolution and metric code. Offsets use half-open intervals, [start, end).
+"""
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
@@ -5,6 +11,12 @@ from dataclasses import asdict, dataclass
 
 @dataclass(frozen=True, slots=True)
 class Span:
+    """A predicted text span from a detector.
+
+    `abstained=True` means the span should be masked as possible PII but should
+    not be counted as a typed-label success in evaluation.
+    """
+
     start: int
     end: int
     label: str
@@ -28,6 +40,8 @@ class Span:
 
 @dataclass(frozen=True, slots=True)
 class GoldSpan:
+    """A normalized gold span used by the evaluator after label mapping."""
+
     start: int
     end: int
     label: str

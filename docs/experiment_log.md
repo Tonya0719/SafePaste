@@ -151,10 +151,43 @@
 - Configuration: `scripts/export_report_tables.py --results-dir results --output results/report_tables.md`
 - Code version: Local workspace; `.git` directory is absent, so no commit hash is available.
 - Expected outcome: A reusable Markdown table export, a final English analysis draft under 1,200 words, updated Todo tracking and passing tests.
-- Actual result: Generated `results/report_tables.md` with frozen, stress, runtime, per-label and Hybrid error-category tables. Added `docs/final_analysis.md` at 1,114 words. Updated `docs/implementation_todo.md` to mark the reporting items complete.
+- Actual result: Generated `results/report_tables.md` with frozen, stress, runtime, per-label and Hybrid error-category tables. Added `docs/final_analysis.md` at 1,114 words.
 - Interpretation: The final report now has reproducible tables and a concise analysis draft grounded in the saved evaluation outputs.
 - Decision: Keep these report artifacts as generated from frozen outputs. Do not revise detector behavior based on report-writing observations.
 - Next action: Run the full test suite and then record the demo.
+
+## EXP-012 Submission Documentation And Runtime Clarification
+
+- Date: 2026-10-01
+- Objective: Close final submission gaps for report structure, data/evaluation explainability, result documentation, module-level code documentation and runtime interpretation.
+- Dataset: Existing data and saved prediction artifacts only.
+- System: Documentation, reporting scripts and tests.
+- Configuration: No detector, threshold, label mapping, overlap resolution or frozen experiment configuration changes. `configs/final_experiment.json` SHA-256: `34B457479DAA048C851E92475074D2CA2068809C29DF64A81360B0E34C06F8BD`.
+- Code version: Local workspace; `.git` directory is absent, so no commit hash is available.
+- Expected outcome: Add submission explainer files, improve README product documentation, restructure the final report draft, clarify cold-start runtime, preserve official predictions and pass the full test suite.
+- Actual result: Added `data/README.md`, `docs/EVALUATION.md` and `results/README.md`; expanded README with persona, input/output, architecture, target/reached metrics, documentation map and test command; rewrote `docs/final_analysis.md` with structured headings and 1,028 words; added module/API docstrings; updated `scripts/analyse_errors.py` to derive first-record and warm runtime from saved predictions; regenerated `results/runtime_summary.json` and `results/report_tables.md`; removed accidental root file `4.25.0`.
+- Hash check: data hashes match `artifacts/data_audit/data_sha256_manifest.json`: development `164CB9CC78EDC45994A3B50CE6B95C1E8CD9DB071290CD2A2C6A49C1E58EDB81`, frozen `05917B6E4F68EDC7CD10F1808C1982F0550CFC63FBD0ED8C5EBCDC493A854EF1`, Singapore stress `88E08F7FF492333EC19F3360A326461B31C8C83B6A88AD047C06B12FD97A5ACE`.
+- Prediction hash check: formal predictions were not regenerated. Current SHA-256 values are Presidio frozen `34FBC149DA7E68BB811117392AB43239245B7CF4C808FCE05BE312DB69C9951D`, GLiNER frozen `BBD1E123930CF26609A755E5896C0F8281BDE40562BD2DDDB2EA51D332B5219F`, Hybrid frozen `56FF3D048EC6FC8473909DB0AD7531322D5C5A70663EE16B0C43B862F6DC7568`, Presidio stress `1293009964A34FE4A51DE8575807B00A641B8561429DAE2093870F22C1383295`, GLiNER stress `1DDF9B4127DA45C3D72EB1CD760383B5CAE6410EF7BB782DDC0A65A58C611D37`, Hybrid stress `A655D3965790474EECD50FFFEF89FE5693D2F471BFB27CB8A894E57DBC5F80BA`.
+- Test result: `conda run -n safepaste python -m unittest discover -s tests -v` ran 29 tests in 10.143 s; all passed.
+- Interpretation: Submission materials now explain the product, data, evaluation, results and limitations without claiming production readiness. Runtime reporting distinguishes cold-start effects from warm local inference.
+- Decision: Preserve frozen metrics and official prediction files. Do not tune or rerun formal detector experiments for this documentation pass.
+- Next action: Student should record/check in the required face-and-screen demo video and manually review the 30 fictional stress records before submission.
+
+## EXP-013 V2 Product-Scope Mapping Re-Score
+
+- Date: 2026-10-01
+- Objective: Preserve the official V1 broad benchmark while adding a V2 product-scope mapping view after the low V1 frozen score exposed label-scope mismatch.
+- Dataset: Existing source datasets and saved prediction files under `results/runs`; detectors were not rerun.
+- System: Re-scoring script and alternate label mapping.
+- Configuration: `configs/label_mapping_v2_product_scope.json`; `scripts/reevaluate_saved_predictions.py --mapping configs/label_mapping_v2_product_scope.json --output-dir results --suffix v2`.
+- Code version: Local workspace; `.git` directory is absent, so no commit hash is available.
+- Expected outcome: V1 remains unchanged; V2 writes separate result files and clearly states it is a post-evaluation diagnostic view, not the official frozen baseline.
+- Actual result: Added `configs/label_mapping_v2_product_scope.json`, `scripts/reevaluate_saved_predictions.py` and `docs/V2_PRODUCT_SCOPE_MAPPING.md`. Generated `results/main_results_v2.csv`, `results/singapore_stress_results_v2.csv`, `results/per_label_results_v2.csv`, `results/report_tables_v2.md` and `results/mapping_v2_summary.json`.
+- V2 result: AI4Privacy frozen Hybrid exact typed recall is 47.86% and overlap protective recall is 65.14% over 8,268 product-scope gold spans. Singapore stress metrics are unchanged: Hybrid exact typed recall 92.45% and overlap protective recall 96.23%.
+- Interpretation: V2 confirms that part of the V1 low score comes from generic government-ID and broad location labels outside current product-scope recognizer coverage. It still does not reach the original 80% target on AI4Privacy frozen, so address boundary, phone generalization and precision issues remain.
+- Decision: Keep V1 as the official broad benchmark. Use V2 only as a post-evaluation product-scope analysis and improvement narrative.
+- Test result: `conda run -n safepaste python -m unittest discover -s tests -v` ran 30 tests in 10.655 s; all passed.
+- Next action: If further code work is allowed, implement a true V3 recognizer coverage improvement for generic government IDs and address normalization, then evaluate it as a separate post-baseline experiment.
 
 ## Template
 

@@ -1,3 +1,10 @@
+"""Metric implementation for SafePaste experiments.
+
+The evaluator consumes source records, mapped gold spans and detector
+predictions. It reports exact/overlap and typed/protective metrics using
+one-to-one prediction/gold matching so duplicate predictions cannot inflate
+scores.
+"""
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -31,6 +38,8 @@ def _matches(pred: Span, gold: GoldSpan, boundary: str, require_label: bool) -> 
 
 
 def score(predictions: list[Span], gold: list[GoldSpan], *, boundary: str, include_abstained: bool, require_label: bool = False) -> Counts:
+    """Score one record with exact or overlap matching and one-to-one assignment."""
+
     eligible = [span for span in predictions if include_abstained or not span.abstained]
     candidates = []
     for pi, pred in enumerate(eligible):
@@ -48,6 +57,8 @@ def score(predictions: list[Span], gold: list[GoldSpan], *, boundary: str, inclu
 
 
 def gold_spans_from_record(record: dict, label_mapping: dict | None = None) -> tuple[list[GoldSpan], dict[str, int]]:
+    """Normalize one record's gold spans through the optional label mapping."""
+
     text = record["text"]
     mapping = label_mapping or {}
     entries = mapping.get("entries", {})
@@ -88,6 +99,8 @@ def gold_spans_from_record(record: dict, label_mapping: dict | None = None) -> t
 
 
 def evaluate_predictions(records: list[dict], predictions: list[list[Span]], label_mapping: dict | None = None) -> dict:
+    """Aggregate metrics for saved predictions aligned with source records."""
+
     totals = {(b, a): [0, 0, 0] for b in ("exact", "overlap") for a in (False, True)}
     abstained = predicted = 0
     skipped_totals = {"excluded_gold_spans": 0, "invalid_gold_spans": 0, "unmapped_gold_spans": 0}
@@ -121,4 +134,6 @@ def evaluate_predictions(records: list[dict], predictions: list[list[Span]], lab
 
 
 def evaluate_records(records: list[dict], predict, label_mapping: dict | None = None) -> dict:
+    """Run a prediction callable over records and evaluate the resulting spans."""
+
     return evaluate_predictions(records, [predict(record["text"]) for record in records], label_mapping)

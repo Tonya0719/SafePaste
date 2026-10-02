@@ -28,18 +28,22 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Local model downloads
+# Local model downloads (TA downloads these separately)
 models/*
 !models/README.md
 
-# Downloaded/generated datasets
+# AI4Privacy source records and row-level derivatives require redistribution permission
 data/ai4privacy_split/*.json
 data/ai4privacy_split/*.jsonl
-
-# Large/generated experiment internals
+!data/ai4privacy_split/manifest.json
 results/runs/
+results/representative_errors.json
 artifacts/threshold_tuning/raw_gliner_predictions.jsonl
-artifacts/threshold_tuning_smoke*/
+artifacts/data_audit/development_label_examples.csv
+artifacts/data_audit/invalid_spans.csv
+
+# Local archive of non-submission drafts and smoke artifacts
+temp/
 
 # Logs and accidental command-output files
 *.log

@@ -8,8 +8,10 @@ from pathlib import Path
 from unittest.mock import patch
 
 from scripts.audit_dataset import audit, sha256_file, validate_records
+from scripts.analyse_errors import latency_summary
 from scripts.build_label_mapping import build_mapping
 from scripts.export_report_tables import run as export_report_tables
+from scripts.reevaluate_saved_predictions import predictions_from_rows
 from scripts.run_experiment import run_experiment
 from scripts.tune_thresholds import predictions_for_thresholds, run_sweep
 from safepaste.evaluation import evaluate_predictions, evaluate_records, gold_spans_from_record, score
@@ -325,6 +327,35 @@ class SafePasteTests(unittest.TestCase):
             self.assertIn("## Runtime Summary", content)
             self.assertIn("| Hybrid | 1 | 2 | 3 | 50.00% | 50.00% | 75.00% | 75.00% | 80.00% | 90.00% | 10.00% |", content)
             self.assertIn("| AI4Privacy frozen | Hybrid | missed_gold | 4 |", content)
+
+    def test_latency_summary_separates_cold_start(self):
+        summary = latency_summary([100.0, 10.0, 20.0, 30.0])
+        self.assertEqual(summary["first_record_ms"], 100.0)
+        self.assertEqual(summary["warm_records"], 3)
+        self.assertEqual(summary["warm_mean_ms"], 20.0)
+        self.assertTrue(summary["warm_excludes_first_record"])
+
+    def test_v2_prediction_rows_round_trip_to_spans(self):
+        rows = [
+            {
+                "predicted_spans": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "label": "PERSON",
+                        "score": 0.8,
+                        "source": "gliner",
+                        "abstained": False,
+                        "recognizer_name": None,
+                    }
+                ]
+            }
+        ]
+        spans = predictions_from_rows(rows)
+        self.assertEqual(spans[0][0], Span(0, 3, "PERSON", 0.8, "gliner", False, None))
+        mapping = json.loads((ROOT / "configs" / "label_mapping_v2_product_scope.json").read_text(encoding="utf-8"))
+        self.assertEqual(mapping["version"], "safepaste-label-mapping-v2-product-scope")
+        self.assertFalse(mapping["policy"]["official_baseline_replaced"])
 
 
 if __name__ == "__main__":

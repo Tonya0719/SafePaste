@@ -1,3 +1,9 @@
+"""Presidio-backed structured PII detector for SafePaste.
+
+The detector wraps Presidio Analyzer with a NoOp NLP engine and additional
+Singapore-specific pattern recognizers. It returns SafePaste `Span` objects in
+the normalized label space and stores recognizer names for error analysis.
+"""
 from __future__ import annotations
 
 import re
@@ -45,6 +51,8 @@ CUSTOM_PATTERNS = (
 
 
 class PresidioDetector:
+    """Detect structured identifiers using Presidio and local custom patterns."""
+
     name = "presidio"
 
     def __init__(self) -> None:
@@ -76,6 +84,8 @@ class PresidioDetector:
         return self._analyzer
 
     def detect(self, text: str) -> list[Span]:
+        """Run Presidio analysis and convert recognized entities to SafePaste spans."""
+
         raw_results = self._load().analyze(text=text, language="en", entities=list(PRESIDIO_ENTITIES))
         spans: list[Span] = []
         for result in raw_results:

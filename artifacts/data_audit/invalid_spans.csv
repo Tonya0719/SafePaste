@@ -1,2 +1,0 @@
-dataset,record_id,span_index,issue,start,end,label,excerpt
-development,development-00543,3,out_of_bounds,197,229,GEOCOORD,

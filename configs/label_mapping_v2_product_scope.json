@@ -1,0 +1,176 @@
+{
+  "version": "safepaste-label-mapping-v2-product-scope",
+  "generated_date": "2026-10-01",
+  "source_dataset": "development_2000.json",
+  "relationship_to_v1": "V1 remains the official broad benchmark mapping. V2 is a post-evaluation product-scope view for analysing the same saved predictions against labels SafePaste actually claims to handle.",
+  "policy": {
+    "frozen_evaluation_used_for_detector_changes": false,
+    "post_evaluation_analysis": true,
+    "official_baseline_replaced": false,
+    "invalid_spans": "Exclude invalid gold spans during normalized evaluation and report their counts.",
+    "overlapping_gold_spans": "Preserve spans during audit; normalized evaluation must use one-to-one matching.",
+    "scope": "English support-text PII before AI upload: names, email, phone, IP addresses, direct address components, local government identifiers and financial identifiers when present."
+  },
+  "target_labels": [
+    "ADDRESS",
+    "EMAIL",
+    "FINANCIAL",
+    "GOVERNMENT_ID",
+    "IP_ADDRESS",
+    "PERSON",
+    "PHONE"
+  ],
+  "entries": {
+    "BOD": {
+      "target": "EXCLUDED",
+      "count": 602,
+      "reason": "Temporal attribute outside the current SafePaste detector scope."
+    },
+    "BUILDING": {
+      "target": "ADDRESS",
+      "count": 546,
+      "reason": "Direct address component relevant to support-text review."
+    },
+    "CITY": {
+      "target": "EXCLUDED",
+      "count": 578,
+      "reason": "City alone is treated as broad location context rather than direct PII in the V2 product-scope view."
+    },
+    "COUNTRY": {
+      "target": "EXCLUDED",
+      "count": 438,
+      "reason": "Country alone is too broad for the V2 support-text PII scope."
+    },
+    "DATE": {
+      "target": "EXCLUDED",
+      "count": 502,
+      "reason": "General dates are outside the current SafePaste PII scope."
+    },
+    "DRIVERLICENSE": {
+      "target": "EXCLUDED",
+      "count": 663,
+      "reason": "Generic multi-country driver licence formats are a documented V1 coverage gap and are reserved for a future recognizer pack."
+    },
+    "EMAIL": {
+      "target": "EMAIL",
+      "count": 691,
+      "reason": "Direct email address PII."
+    },
+    "GEOCOORD": {
+      "target": "ADDRESS",
+      "count": 50,
+      "reason": "Precise coordinates can reveal a specific location."
+    },
+    "GIVENNAME1": {
+      "target": "PERSON",
+      "count": 586,
+      "reason": "Given names are person-name components."
+    },
+    "GIVENNAME2": {
+      "target": "PERSON",
+      "count": 136,
+      "reason": "Given names are person-name components."
+    },
+    "IDCARD": {
+      "target": "EXCLUDED",
+      "count": 774,
+      "reason": "Generic multi-country ID-card formats are a documented V1 coverage gap and are reserved for a future recognizer pack."
+    },
+    "IP": {
+      "target": "IP_ADDRESS",
+      "count": 572,
+      "reason": "IP addresses are structured network identifiers."
+    },
+    "LASTNAME1": {
+      "target": "PERSON",
+      "count": 668,
+      "reason": "Last names are person-name components."
+    },
+    "LASTNAME2": {
+      "target": "PERSON",
+      "count": 172,
+      "reason": "Last names are person-name components."
+    },
+    "LASTNAME3": {
+      "target": "PERSON",
+      "count": 61,
+      "reason": "Last names are person-name components."
+    },
+    "PASS": {
+      "target": "EXCLUDED",
+      "count": 440,
+      "reason": "Passwords are credentials; this project reports credentials as outside the PII detector scope."
+    },
+    "PASSPORT": {
+      "target": "EXCLUDED",
+      "count": 680,
+      "reason": "Generic multi-country passport formats are a documented V1 coverage gap and are reserved for a future recognizer pack."
+    },
+    "POSTCODE": {
+      "target": "ADDRESS",
+      "count": 525,
+      "reason": "Postal codes are direct address components in support text."
+    },
+    "SECADDRESS": {
+      "target": "ADDRESS",
+      "count": 235,
+      "reason": "Secondary address fields are direct address components."
+    },
+    "SEX": {
+      "target": "EXCLUDED",
+      "count": 566,
+      "reason": "Demographic attributes are outside the current direct-PII detector scope."
+    },
+    "SOCIALNUMBER": {
+      "target": "EXCLUDED",
+      "count": 747,
+      "reason": "Generic social-number formats are a documented V1 coverage gap and are reserved for a future recognizer pack."
+    },
+    "STATE": {
+      "target": "EXCLUDED",
+      "count": 559,
+      "reason": "State or region alone is treated as broad location context in the V2 product-scope view."
+    },
+    "STREET": {
+      "target": "ADDRESS",
+      "count": 540,
+      "reason": "Street fields are direct address components."
+    },
+    "TEL": {
+      "target": "PHONE",
+      "count": 488,
+      "reason": "Direct telephone number PII."
+    },
+    "TIME": {
+      "target": "EXCLUDED",
+      "count": 1124,
+      "reason": "Standalone times are outside the current SafePaste PII scope."
+    },
+    "TITLE": {
+      "target": "EXCLUDED",
+      "count": 568,
+      "reason": "Honorifics or job titles alone are not treated as PII in this scope."
+    },
+    "USERNAME": {
+      "target": "EXCLUDED",
+      "count": 825,
+      "reason": "Account usernames are outside the current detector scope and are reported as a limitation."
+    }
+  },
+  "excluded_labels": [
+    "BOD",
+    "CITY",
+    "COUNTRY",
+    "DATE",
+    "DRIVERLICENSE",
+    "IDCARD",
+    "PASS",
+    "PASSPORT",
+    "SEX",
+    "SOCIALNUMBER",
+    "STATE",
+    "TIME",
+    "TITLE",
+    "USERNAME"
+  ]
+}
